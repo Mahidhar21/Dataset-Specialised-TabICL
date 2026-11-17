@@ -23,3 +23,22 @@ benchmark/dataset-250115/data/
 # Logs
 *_output.txt
 *.log
+
+# Exclude raw benchmark datasets
+benchmark/benchmark_dataset/data/
+benchmark/dataset-250115/data/
+benchmark/**/data/
+
+# Exclude large generated artifacts
+*.npy
+*.npz
+*.ckpt
+*.pt
+*.pth
+*.joblib
+*.pkl
+
+# Python caches
+__pycache__/
+.venv/
+venv/
