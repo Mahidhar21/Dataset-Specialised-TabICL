@@ -1,0 +1,25 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.pytest_cache/
+.vscode/
+.idea/
+
+# Datasets
+benchmark/dataset-250115/data/
+*.npy
+*.npz
+
+# Model weights and fitted routers
+*.ckpt
+*.pth
+*.pt
+*.joblib
+*.pkl
+*.safetensors
+
+# Logs
+*_output.txt
+*.log
