@@ -1,4 +1,3 @@
-
 \documentclass[conference]{IEEEtran}
 
 \usepackage{graphicx}
@@ -12,15 +11,19 @@
 \usepackage{listings}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning}
-% Replace this with the actual URL after publishing Stage 3/4.
-\newcommand{\implementationrepo}{\url{https://github.com/sri-nikesh-31/Dataset-Specialised-TabICL}}
+
 
 \title{Dataset-Specialised TabICL: Dataset Representation Learning, Expert Specialisation, and Retrieval-Based Prediction}
 
 \author{
-\IEEEauthorblockN{Project Team}
+\IEEEauthorblockN{
+Ayinala Sri Nikesh (240041005)\\
+Geddada Mahidhar (240041017)\\
+Kesavarapu Deepak Reddy (240041022)
+}
 \IEEEauthorblockA{
-Dataset-Specialised TabICL Project\\
+MA 305 -- Data Science Project\\
+End Evaluation -- Team 7\\
 \url{https://github.com/Mahidhar21/Dataset-Specialised-TabICL}
 }
 }
@@ -57,7 +60,7 @@ This report documents all four implemented stages and distinguishes exploratory 
 
 Our contributions are fivefold. First, we construct and align multiple fixed-dimensional representations of 67 binary-classification datasets. Second, we quantify the sensitivity of pooled TabICL embeddings to context-row resampling. Third, we implement family-aware partitioning and training-only clustering. Fourth, we implement independent multi-dataset fine-tuning, nearest-centroid prediction, and random and fixed routing controls. Fifth, a separate team benchmark characterises pretrained TabICL v1 on 188 completed TALENT tasks.
 
-The source code and experimental artifacts are maintained in the project repository:
+The consolidated source code and recorded experimental artifacts are maintained in the project repository~\cite{project}:
 
 \url{https://github.com/Mahidhar21/Dataset-Specialised-TabICL}
 
@@ -470,7 +473,7 @@ Timing & Fit and probability prediction only\\\bottomrule
 \end{tabular}
 \end{table}
 
-The supplied workbook records 187 scored and 13 pending tasks. The benchmarking report reconciles this snapshot against 188 completed JSON records, identifying \texttt{philippine} as the additional binary task (75.15\% accuracy, AUC 0.8356, log loss 0.4955, runtime 107.54 s, rounded). We independently checked the workbook counts and recomputed its scored-row aggregates: 83.52\% accuracy, 0.8939 AUC, 0.3790 log loss, and 12.54 s median runtime. The headline results below use the later 188-record report, not a mixture of denominators. The original JSON records and notebook have not been supplied for this integration, so their full-precision values and reconciliation cannot be independently audited here. The remaining 12 tasks are excluded from all headline aggregates, rather than counted as zero. Completion coverage is 94\%.
+The supplied workbook records 187 scored and 13 pending tasks. The benchmarking report reconciles this snapshot against 188 completed JSON records, identifying \texttt{philippine} as the additional binary task (75.15\% accuracy, AUC 0.8356, log loss 0.4955, runtime 107.54 s, rounded). We independently checked the workbook counts and recomputed its scored-row aggregates: 83.52\% accuracy, 0.8939 AUC, 0.3790 log loss, and 12.54 s median runtime. The headline results below use the later 188-record report, not a mixture of denominators. The benchmarking notebook is included in the consolidated repository and was reviewed statically. The original 188 JSON records are unavailable for this synthesis, so the full-precision values and reconciliation cannot be independently audited here. The remaining 12 tasks are excluded from all headline aggregates, rather than counted as zero. Completion coverage is 94\%.
 
 \subsection{Metrics and Results}
 For task $d$ with $n_d$ test rows and class probabilities $p_{ic}$, accuracy and log loss are
@@ -587,10 +590,38 @@ Such groups would be unsuitable for the intended multi-dataset expert training.
 These observations demonstrate the importance of evaluating representation discrimination and cluster balance alongside conventional clustering metrics.
 
 \section{Reproducibility and Implementation}
-Consolidated team repository (integration planned): \url{https://github.com/Mahidhar21/Dataset-Specialised-TabICL}. Stage 3--4 implementation and baseline results: \implementationrepo.
-The upstream scripts \texttt{strategy\_3\_1.py}, \texttt{strategy\_3\_2.py}, \texttt{compare\_representations.py}, \texttt{test\_embedding\_stability.py}, and \texttt{prepare\_routing\_k4.py} provide the initial representation and clustering experiments. The downstream \texttt{expert\_training\_and\_routing/} package contains \texttt{common.py}, \texttt{routing\_manifest.csv}, \texttt{extract\_embeddings.py}, \texttt{build\_router.py}, \texttt{train\_experts.py}, \texttt{evaluate.py}, and \texttt{evaluate\_routing\_ablation.py}. It uses TabICL 2.2.0 and internal fine-tuning APIs. The upstream model source is available at \url{https://github.com/soda-inria/tabicl}.
-The TALENT notebook and benchmarking code are planned for integration into the team repository; their publication is not yet verified. The reported notebook pins commit \path{7ccaddaa45f9d586d90df37126d39a0cb2a964e7} and checkpoint \texttt{tabicl-classifier-v1-20250208.ckpt}. The supplied workbook and benchmarking report document the run.
-The frozen baseline archive contains the downstream code, regenerated embeddings, router, expert checkpoints, and evaluation artifacts and was verified with SHA-256. Original benchmark arrays and the upstream pretrained checkpoint must be obtained separately. The repository should include the routing manifest, configuration, training histories and per-dataset evaluation metrics; large checkpoints and source datasets should remain outside ordinary Git.
+The consolidated team implementation~\cite{project} is available at \url{https://github.com/Mahidhar21/Dataset-Specialised-TabICL}. All three team contributions were integrated through pull request 1, which the project team reports has been merged into the main branch. The integration commit is \texttt{9c00a38}. The repository contains the following components:
+\begin{itemize}
+\item \path{dataset_representation_and_clustering/}: statistical meta-features, TabICL embeddings, stability analysis, clustering, family-aware splits and exploratory outputs.
+\item \path{expert_training_and_routing/}: shared utilities, frozen routing manifest, embedding extraction, router fitting, episodic expert training, prediction and routing ablations.
+\item \path{talent_benchmarking/}: independent TabICL v1 Colab notebook and execution instructions.
+\item \path{results/}: expert configurations and training histories, per-dataset evaluations, routing selections, aggregate metrics, TALENT workbook and benchmarking report.
+\item \path{report/}: consolidated LaTeX manuscript and figures.
+\end{itemize}
+The root README documents reproduction commands. The environment versions are recorded in \path{requirements.txt}, and the upstream TabICL revision in \path{tabicl_upstream_commit.txt}. The specialist implementation uses TabICL 2.2.0 and internal fine-tuning APIs; the source is available at \url{https://github.com/soda-inria/tabicl}. The independent TALENT notebook pins commit \path{7ccaddaa45f9d586d90df37126d39a0cb2a964e7} and checkpoint \texttt{tabicl-classifier-v1-20250208.ckpt}. Its separate environment must be preserved.
+
+\subsection{Reproduction and Integration Verification}
+Run the specialist pipeline from the repository root using the appropriate Python/CUDA environment and the original numerical dataset arrays. Set \texttt{DATA} to the dataset directory. The README covers embedding extraction, router fitting, training of experts 0--3 and evaluation of all routing controls. For example, the module entry points are:
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize,breaklines=true,frame=single]
+python -m expert_training_and_routing.extract_embeddings --data-dir "$DATA" --device cpu
+python -m expert_training_and_routing.build_router
+for i in 0 1 2 3; do
+  python -m expert_training_and_routing.train_experts --data-dir "$DATA" --expert "$i" --epochs 3 --steps-per-epoch 30 --rows 64 --features 32 || break
+done
+python -m expert_training_and_routing.evaluate --data-dir "$DATA" --max-datasets 0 --top-k 3
+\end{lstlisting}
+After restructuring, Python and notebook syntax checks passed, and all five downstream module command-line interfaces loaded successfully. A two-dataset inference smoke test reused the frozen router and expert checkpoints, with zero failures. The observed per-dataset accuracies and selected expert indices matched the original results for the two tested tasks, as shown in Table~\ref{tab:smoke}. This check does not establish equivalence on all datasets or constitute a full retraining or TALENT rerun.
+\begin{table}[t]
+\caption{Post-integration Inference Smoke Test (Accuracy, \%)}
+\label{tab:smoke}
+\centering\footnotesize
+\begin{tabular}{lrrr}\toprule
+Dataset & Pretrained & Top-1 & Top-3\\\midrule
+Microwave 10.0 GHz & 89.84 & 88.28 & 90.62\\
+Microwave 10.5 GHz & 92.97 & 92.19 & 92.19\\\bottomrule
+\end{tabular}
+\end{table}
+The frozen baseline archive contains the downstream code, regenerated embeddings, router, expert checkpoints and evaluation artifacts; its SHA-256 checksum was verified. Large checkpoints, generated embeddings, fitted router objects and original dataset arrays are kept outside ordinary Git. The original benchmark arrays and upstream pretrained checkpoint must be obtained separately. The TALENT workbook and report are included, but the original 188 per-task JSON records are not available for independent verification. Full retraining, exploratory Stage 1--2 reruns and full TALENT benchmarking were not repeated after consolidation.
 
 \section{Discussion and Limitations}
 The representation experiments support a practical 512D mean-pooled, four-cluster prototype. The downstream experiments establish that independent multi-dataset fine-tuning and retrieval-based inference are feasible on a 6 GB GPU. They do not establish that dataset similarity predicts expert competence. In particular, one selected expert remains pretrained and the fixed ensemble is slightly stronger in accuracy than nearest routing.
@@ -611,9 +642,9 @@ We implemented all four stages of a dataset-specialised TabICL architecture: rep
 TabICL project, ``TabICL: A tabular foundation model for in-context learning,'' software repository. [Online]. Available: \url{https://github.com/soda-inria/tabicl}
 
 \bibitem{project}
-Dataset-Specialised TabICL Project,
-``Dataset-Specialised-TabICL,''
-GitHub repository.
+A. Sri Nikesh, G. Mahidhar, and K. Deepak Reddy,
+``Dataset-Specialised TabICL,''
+MA 305 Data Science Project, Team 7, 2026.
 [Online]. Available:
 \url{https://github.com/Mahidhar21/Dataset-Specialised-TabICL}
 
