@@ -1,3 +1,4 @@
+import os
 
 import json
 import warnings
@@ -10,10 +11,8 @@ from tabicl import TabICLClassifier
 
 warnings.filterwarnings("ignore")
 
-BASE_DIR = Path(
-    r"C:\mahidhar\Projects\DS Project\benchmark"
-)
-DATA_DIR = BASE_DIR / "dataset-250115" / "data"
+BASE_DIR = Path(__file__).resolve().parent
+DATA_DIR = Path(os.environ.get("DATA", str(BASE_DIR / "dataset-250115" / "data")))
 OUTPUT_DIR = BASE_DIR / "representations" / "strategy_3_2"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 

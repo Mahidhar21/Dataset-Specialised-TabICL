@@ -1,3 +1,4 @@
+import os
 
 import json
 import gc
@@ -18,10 +19,8 @@ warnings.filterwarnings("ignore")
 # CONFIGURATION
 # ============================================================
 
-BASE_DIR = Path(
-    r"C:\mahidhar\Projects\DS Project\benchmark"
-)
-DATA_DIR = BASE_DIR / "dataset-250115" / "data"
+BASE_DIR = Path(__file__).resolve().parent
+DATA_DIR = Path(os.environ.get("DATA", str(BASE_DIR / "dataset-250115" / "data")))
 STAT_DIR = BASE_DIR / "representations" / "strategy_3_1"
 OUT_DIR = BASE_DIR / "representations" / "stability"
 

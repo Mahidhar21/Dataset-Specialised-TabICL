@@ -42,3 +42,24 @@ benchmark/**/data/
 __pycache__/
 .venv/
 venv/
+
+# Generated local data and model artifacts
+__pycache__/
+*.pyc
+.venv/
+*.ckpt
+*.pt
+*.pth
+*.safetensors
+*.joblib
+*.pkl
+*.npy
+*.npz
+outputs/
+data/
+datasets/
+dataset-250115/
+.env
+.env.*
+*.tar
+*.zip

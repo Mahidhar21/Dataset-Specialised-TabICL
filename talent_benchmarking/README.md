@@ -1,0 +1,5 @@
+# TALENT 200 benchmarking (TabICL v1)
+
+Open `TabICL_TALENT_200_Colab.ipynb` in Google Colab, select a GPU runtime, run all cells and authorize Drive access. The notebook pins upstream commit `7ccaddaa45f9d586d90df37126d39a0cb2a964e7` and checks SHA-256 digests for the data and checkpoint. It uses 32 estimators, seed 42, full official train/test partitions, and AMP off. Outputs are persisted in `/content/drive/MyDrive/TabICL_TALENT_v1_200/` as per-task JSON and an Excel workbook. Reuse that directory only for the same configuration; use a fresh directory for changed settings/hardware. Run one notebook per output directory. Failed tasks are retried; scored tasks are skipped.
+
+`../results/talent_benchmark/` contains the supplied workbook (187 scored tasks) and report (188 scored tasks, including philippine). Raw 188-task JSON records are not included in the supplied files. Reported means describe the completed subset, not all 200 tasks. This is not a matched comparison with the v2 specialist pipeline.

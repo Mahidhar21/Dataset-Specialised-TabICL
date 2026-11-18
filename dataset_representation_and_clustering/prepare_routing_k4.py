@@ -9,7 +9,7 @@ from sklearn.cluster import KMeans
 from sklearn.model_selection import GroupShuffleSplit
 from sklearn.preprocessing import StandardScaler
 
-BASE = Path(r"C:\mahidhar\Projects\DS Project\benchmark")
+BASE = Path(__file__).resolve().parent
 STAT = BASE / "representations" / "strategy_3_1"
 TAB = BASE / "representations" / "strategy_3_2"
 OUT = BASE / "representations" / "routing_k4"
