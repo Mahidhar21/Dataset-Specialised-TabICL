@@ -96,7 +96,7 @@ Stability was measured on 12 datasets with three samples of 128 rows each. The f
 
 ## Stage 2 — Dataset clustering
 
-Exploratory K=8 experiments produced some very small groups. K=4 was chosen for training feasibility, not proven predictive superiority. The final router fits a variance mask, standard scaler and ordinary K-means on the 53 meta-training embeddings only. All 53 original cluster assignments were reproduced.
+Exploratory K=8 experiments produced some very small groups. K=4 was selected for practical training feasibility rather than demonstrated predictive superiority.. The final router fits a variance mask, standard scaler and ordinary K-means on the 53 meta-training embeddings only. All 53 original cluster assignments were reproduced.
 
 | Cluster | Assigned datasets | Expert training | Expert validation |
 | --- | ---: | ---: | ---: |
