@@ -27,9 +27,7 @@ warnings.filterwarnings("ignore")
 # CONFIGURATION
 # ============================================================
 
-BASE_DIR = Path(
-    r"C:\mahidhar\Projects\DS Project\benchmark"
-)
+BASE_DIR = Path(__file__).resolve().parent
 
 STAT_DIR = BASE_DIR / "representations" / "strategy_3_1"
 TAB_DIR = BASE_DIR / "representations" / "strategy_3_2"

@@ -8,9 +8,7 @@ import torch
 from sklearn.datasets import make_classification
 from tabicl import TabICLClassifier
 
-BASE_DIR = Path(
-    r"C:\mahidhar\Projects\DS Project\benchmark"
-)
+BASE_DIR = Path(__file__).resolve().parent
 
 OUTPUT_DIR = BASE_DIR / "representations" / "strategy_3_2"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
